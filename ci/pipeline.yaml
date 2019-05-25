@@ -8,7 +8,7 @@ resources:
 - name: image-source
   type: docker-image
   source:
-    repository: http://35.228.215.6:8080/react-ci-hello
+    repository: http://35.228.215.6:5000/react-ci-hello
     username: ((docker-private-username))
     password: ((docker-private-password))
 - name: preview-source
