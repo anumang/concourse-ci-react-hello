@@ -17,3 +17,11 @@ echo "Port:           ${PORT}"
 echo "Git SHA:        ${GIT_SHA}"
 echo "VERSION:        ${VERSION}"
 echo "Swarm:          ${SWARM_HOST}"
+
+rm -f docker-compose.yml temp.yml  
+( echo "cat <docker-compose.yml";
+  cat source-code/ci/templates/docker-compose.tmp.yml;
+  echo "EOF";
+) >temp.yml
+. temp.yml
+cat docker-compose.yml
