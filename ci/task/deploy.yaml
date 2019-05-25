@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: openjdk
+    tag: 'alpine'
+
+inputs:
+- name: source-code
+- name: app-image
+- name: version
+
+run:
+  path: source-code/ci/scripts/deploy.sh
+
+params:
+  APP:
+  NAMESPACE:
+  PORT:
+  ENVIRONMENT:
+  SWARM_HOST:

@@ -1,0 +1,179 @@
+groups:
+- name: preview
+  jobs: [testflight-preview, build-preview, deploy-preview, version-minor, version-major]
+- name: prod
+  jobs: [testflight-prod, build-prod, deploy-prod]
+
+resources:
+- name: image-source
+  type: docker-image
+  source:
+    repository: http://35.228.215.6:8080/react-ci-hello
+    username: ((docker-private-username))
+    password: ((docker-private-password))
+- name: preview-source
+  type: git
+  source:
+    branch: development
+    private_key: ((github-private-key))
+    uri: https://github.com/anumang/react-ci-hello.git
+- name: prod-source
+  type: git
+  source:
+    branch: master
+    private_key: ((github-private-key))
+    uri: https://github.com/anumang/react-ci-hello.git
+- name: version
+  type: semver
+  source:
+    branch: version
+    driver: git
+    file: version
+    initial_version: 0.0.1
+    private_key: ((github-private-key))
+    uri: https://github.com/anumang/react-ci-hello.git
+
+jobs:
+- name: testflight-preview
+  plan:
+  - get: preview-source
+    trigger: true
+  - task: unit-tests
+    file: preview-source/ci/tasks/unit-tests.yaml
+    input_mapping:
+      source-code: preview-source
+
+- name: testflight-prod
+  plan:
+  - get: prod-source
+    trigger: true
+  - task: unit-tests
+    file: prod-source/ci/tasks/unit-tests.yaml
+    input_mapping:
+      source-code: prod-source
+
+- name: build-preview
+  plan:
+  - get: preview-source
+    passed:
+    - testflight-preview
+    trigger: true
+  - task: build
+    file: preview-source/ci/tasks/build.yaml
+    params:
+    input_mapping:
+      source-code: preview-source
+  - put: version
+    params:
+      bump: patch
+      pre: rc
+  - put: image-source
+    params:
+      build: .
+      build_args:
+        BUILD_DIR: build-dir
+      dockerfile: preview-source/Dockerfile
+      tag: version/version
+      tag_as_latest: true
+    input_mapping:
+      version: version
+
+- name: version-minor
+  plan:
+  - get: preview-source
+  - put: version
+    params:
+      bump: minor
+      pre: rc
+
+- name: version-major
+  plan:
+  - get: preview-source
+  - put: version
+    params:
+      bump: major
+      pre: rc
+
+- name: build-prod
+  plan:
+  - get: prod-source
+    passed:
+    - testflight-prod
+    trigger: true
+  - task: build
+    file: prod-source/ci/tasks/build.yaml
+    params:
+    input_mapping:
+      source-code: prod-source
+  - put: version
+    params:
+      bump: final
+  - put: image-source
+    params:
+      build: .
+      build_args:
+        BUILD_DIR: build-dir
+      dockerfile: prod-source/Dockerfile
+      tag: version/version
+      tag_as_latest: true
+    input_mapping:
+      version: version
+
+- name: deploy-preview
+  plan:
+  - get: image-source
+    passed:
+    - build-preview
+    trigger: true
+  - get: version
+    passed:
+    - build-preview
+  - get: preview-source
+    passed:
+    - build-preview
+  - task: deploy
+    file: preview-source/ci/tasks/deploy.yaml
+    params:
+      APP: react-ci-hello
+      ENVIRONMENT: test
+      SWARM_HOST: ((swarm-host)
+      NAMESPACE: react-ci-hello
+      PORT: 8080
+    input_mapping:
+      app-image: image-source
+      source-code: preview-source
+      version: version
+  - put: preview-source
+    params:
+      repository: preview-source
+      tag: version/version
+
+- name: deploy-prod
+  plan:
+  - get: image-source
+    passed:
+    - build-prod
+    trigger: true
+  - get: version
+    passed:
+    - build-prod
+  - get: prod-source
+    passed:
+    - build-prod
+  - task: deploy
+    file: prod-source/ci/tasks/deploy.yaml
+    params:
+      APP: react-ci-hello
+      ENVIRONMENT: prod
+      SWARM_HOST: ((swarm-host))
+      NAMESPACE: react-ci-hello
+      PORT: 8080
+    input_mapping:
+      app-image: image-source
+      source-code: prod-source
+      version: version
+  - put: prod-source
+    params:
+      repository: prod-source
+      tag: version/version
+
