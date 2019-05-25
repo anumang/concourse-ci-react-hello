@@ -136,7 +136,7 @@ jobs:
     params:
       APP: react-ci-hello
       ENVIRONMENT: test
-      SWARM_HOST: ((swarm-host)
+      SWARM_HOST: ((swarm-host))
       NAMESPACE: react-ci-hello
       PORT: 8080
     input_mapping:
