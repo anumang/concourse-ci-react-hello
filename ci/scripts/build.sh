@@ -22,7 +22,7 @@ else
     echo Build Succeed.
 fi
 
-cp -R public/ ../build-dir/public
+cp -R build/ ../build-dir
 
-test -f ../build-dir/public/*.html
-test -f ../build-dir/public/*.js
+test -f ../build-dir/*.html
+test -f ../build-dir/*.js
