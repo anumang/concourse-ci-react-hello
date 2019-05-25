@@ -12,5 +12,3 @@ inputs:
 
 run:
   path: source-code/ci/scripts/unit-tests.sh
-
-params:
