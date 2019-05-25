@@ -12,14 +12,6 @@ npm install
 
 npm run build
 
-if [ $? -ne 0 ]
-then
-    echo Failed!
-    exit 1;
-else
-    echo Succeed
-fi
-
 cp -R build/ ../build-dir
 
 test -f ../build-dir/*.html
