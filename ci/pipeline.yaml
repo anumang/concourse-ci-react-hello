@@ -16,13 +16,13 @@ resources:
   source:
     branch: development
     private_key: ((github-private-key))
-    uri: https://github.com/anumang/react-ci-hello.git
+    uri: git@github.com:anumang/react-ci-hello.git
 - name: prod-source
   type: git
   source:
     branch: master
     private_key: ((github-private-key))
-    uri: https://github.com/anumang/react-ci-hello.git
+    uri: git@github.com:anumang/react-ci-hello.git
 - name: version
   type: semver
   source:
@@ -31,7 +31,7 @@ resources:
     file: version
     initial_version: 0.0.1
     private_key: ((github-private-key))
-    uri: https://github.com/anumang/react-ci-hello.git
+    uri: git@github.com:anumang/react-ci-hello.git
 
 jobs:
 - name: testflight-preview
