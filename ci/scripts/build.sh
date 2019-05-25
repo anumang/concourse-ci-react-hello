@@ -20,16 +20,8 @@ else
     echo Succeed
 fi
 
-echo test1
-
 cp -R build/ ../build-dir
-
-echo test2
 
 test -f ../build-dir/*.html
 
-echo test3
-
 test -f ../build-dir/*.js
-
-echo test4
