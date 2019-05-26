@@ -17,7 +17,7 @@ GIT_SHA=$(cat source-code/.git/ref)
 echo "Git SHA:        ${GIT_SHA}"
 echo "VERSION:        ${VERSION}"
 
-rm -f docker-compose.yml temp.yml  
+rm -f source-code/ci/templates/docker-compose.yml temp.yml  
 ( echo "cat <docker-compose.yml";
   cat source-code/ci/templates/docker-compose.tmp.yml;
   echo "EOF";
