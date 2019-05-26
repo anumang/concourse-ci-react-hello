@@ -18,6 +18,6 @@ GIT_SHA=$(cat source-code/.git/ref)
 echo "Git SHA:        ${GIT_SHA}"
 echo "VERSION:        ${VERSION}"
 
-eval "cat <<< \"$(<${DCK_TMP})\" > docker-compose.yml" 2> /dev/null
+eval "cat <<< \"$(<source-code/ci/templates/docker-compose.tmp.yml)\" > docker-compose.yml" 2> /dev/null
 
 cat docker-compose.yml
