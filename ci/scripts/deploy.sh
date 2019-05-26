@@ -18,8 +18,11 @@ GIT_SHA=$(cat source-code/.git/ref)
 echo "Git SHA:        ${GIT_SHA}"
 echo "VERSION:        ${VERSION}"
 
-( 
-  cat ${DCK_TMP}
-  echo "EOF";
-) > docker-compose.yml
+cat >docker-compose.yml (
+    echo "<<EOF";
+    cat ${DCK_TMP}
+    echo "EOF";
+)
+  
+
 cat docker-compose.yml
