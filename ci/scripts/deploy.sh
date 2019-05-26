@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Application:    ${APP}"
 echo "Namespace:      ${NAMESPACE}"
