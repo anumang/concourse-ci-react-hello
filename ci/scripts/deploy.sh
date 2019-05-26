@@ -7,6 +7,7 @@ echo "Swarm:          ${SWARM_HOST}"
 echo "Port:           ${PORT}"
 
 CI_DIR=source-code/ci
+DCK_TMP=source-code/ci/templates/docker-compose.tmp.yml
 
 IMAGE_REPOSITORY=$(cat app-image/repository)
 IMAGE_DIGEST=$(cat app-image/digest)
@@ -18,7 +19,7 @@ echo "Git SHA:        ${GIT_SHA}"
 echo "VERSION:        ${VERSION}"
 
 ( 
-  cat ../templates/docker-compose.tmp.yml;
+  cat ${DCK_TMP}
   echo "EOF";
 ) > docker-compose.yml
 cat docker-compose.yml
