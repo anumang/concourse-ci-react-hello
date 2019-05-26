@@ -1,5 +1,7 @@
 #!/bin/sh
 
+apk add --update gettext
+
 echo "Application:    ${APP}"
 echo "Namespace:      ${NAMESPACE}"
 echo "Environment:    ${ENVIRONMENT}"
