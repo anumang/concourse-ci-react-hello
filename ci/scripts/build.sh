@@ -14,6 +14,6 @@ npm run build
 
 cp -R build/ ../build-dir
 
-#test -f ../build-dir/*.html
+test -f ../build-dir/*.html
 
-#test -f ../build-dir/*.js
+test -f ../build-dir/*.js

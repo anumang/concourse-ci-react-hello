@@ -15,6 +15,7 @@ IMAGE_REPOSITORY=$(cat app-image/repository)
 IMAGE_DIGEST=$(cat app-image/digest)
 
 IMAGE="${IMAGE_REPOSITORY}@${IMAGE_DIGEST}"
+EXPORT IMAGE
 GIT_SHA=$(cat source-code/.git/ref)
 
 echo "Git SHA:        ${GIT_SHA}"
