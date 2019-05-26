@@ -8,9 +8,11 @@ resources:
 - name: image-source
   type: docker-image
   source:
-    repository: http://35.228.215.6:5000
+    repository: 35.228.215.6:5000/react-ci-hello
     username: ((docker-private-username))
     password: ((docker-private-password))
+    insecure_registries: [ "35.228.215.6:5000" ]
+    debug: true
 - name: preview-source
   type: git
   source:
@@ -77,6 +79,8 @@ jobs:
       tag_as_latest: true
     input_mapping:
       version: version
+    get_params:
+      skip_download: true
 
 - name: version-minor
   plan:
@@ -118,6 +122,8 @@ jobs:
       tag_as_latest: true
     input_mapping:
       version: version
+    get_params:
+      skip_download: true
 
 - name: deploy-preview
   plan:
