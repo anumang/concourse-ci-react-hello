@@ -157,15 +157,9 @@ jobs:
 - name: deploy-prod
   plan:
   - get: image-source
-    passed:
-    - build-prod
     trigger: true
   - get: version
-    passed:
-    - build-prod
   - get: prod-source
-    passed:
-    - build-prod
   - task: deploy
     file: prod-source/ci/tasks/deploy.yaml
     params:
