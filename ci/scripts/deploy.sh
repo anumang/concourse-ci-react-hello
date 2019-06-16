@@ -6,6 +6,7 @@ mkdir ~/.ssh
 
 echo "$SWARM_SSH_PRIVATE" > ~/.ssh/id_rsa
 echo "StrictHostKeyChecking no" > ~/.ssh/config
+chmod 600 ~/.ssh/id_rsa
 
 echo "Application:    ${APP}"
 echo "Namespace:      ${NAMESPACE}"
