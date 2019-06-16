@@ -5,6 +5,7 @@ apk add --update gettext openssh
 mkdir ~/.ssh
 
 echo "$SWARM_SSH_PRIVATE" > ~/.ssh/id_rsa
+echo "StrictHostKeyChecking no" > ~/.ssh/config
 
 echo "Application:    ${APP}"
 echo "Namespace:      ${NAMESPACE}"
