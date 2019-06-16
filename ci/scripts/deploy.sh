@@ -1,6 +1,10 @@
 #!/bin/sh
 
-apk add --update gettext
+apk add --update gettext openssh
+
+mkdir ~/.ssh
+
+echo "$SWARM_SSH_PRIVATE" > ~/.ssh/id_rsa
 
 echo "Application:    ${APP}"
 echo "Namespace:      ${NAMESPACE}"

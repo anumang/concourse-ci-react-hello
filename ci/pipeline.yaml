@@ -166,6 +166,7 @@ jobs:
       APP: react-ci-hello
       ENVIRONMENT: prod
       SWARM_HOST: ((swarm-host))
+      SWARM_SSH_PRIVATE: ((swarm-ssh-private))
       NAMESPACE: react-ci-hello
       PORT: 8080
     input_mapping:
