@@ -30,4 +30,4 @@ echo "Git SHA:        ${IMAGE}"
 envsubst < ${DCK_TMP} > docker-compose.yml
 cat docker-compose.yml
 
-docker -H ${SWARM_HOST} stack deploy --compose-file docker-compose.yml ${APP}
+docker -H ${SWARM_HOST} stack deploy --compose-file docker-compose.yml ${APP} --with-registry-auth
