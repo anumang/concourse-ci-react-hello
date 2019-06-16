@@ -144,7 +144,7 @@ jobs:
       ENVIRONMENT: test
       SWARM_HOST: ((swarm-host))
       NAMESPACE: react-ci-hello
-      PORT: 8080
+      PORT: 3000
     input_mapping:
       app-image: image-source
       source-code: preview-source
@@ -168,7 +168,7 @@ jobs:
       SWARM_HOST: ((swarm-host))
       SWARM_SSH_PRIVATE: ((swarm-ssh-private))
       NAMESPACE: react-ci-hello
-      PORT: 8080
+      PORT: 3000
     input_mapping:
       app-image: image-source
       source-code: prod-source
