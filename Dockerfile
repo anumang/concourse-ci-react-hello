@@ -1,10 +1,10 @@
 FROM node:8
 
-ARG BUILD_DIR=./build
+ARG BUILD_DIR
 
-WORKDIR /home/app
+WORKDIR ${BUILD_DIR}
 
-COPY ${BUILD_DIR}/* ./
+COPY . ./
 
 EXPOSE 3000
 CMD [ "npm", "start" ]

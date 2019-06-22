@@ -12,7 +12,7 @@ npm install
 
 npm run build
 
-cp -R build/ ../build-dir
+cp -R ./ ../build-dir
 
 #test -f ../build-dir/static/*.html
 
