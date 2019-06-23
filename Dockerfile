@@ -4,4 +4,4 @@ ARG BUILD_DIR
 
 WORKDIR /usr/local/apache2/htdocs/
 
-COPY {BUILD_DIR} ./
+COPY ${BUILD_DIR} ./
