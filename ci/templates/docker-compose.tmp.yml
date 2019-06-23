@@ -5,4 +5,4 @@ services:
     image: ${IMAGE}
     build: .
     ports:
-      - ${PORT}:${PORT}
+      - ${PORT}:80

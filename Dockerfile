@@ -1,10 +1,7 @@
-FROM node:8
+FROM httpd:2.4
 
 ARG BUILD_DIR
 
-WORKDIR /home/app
+WORKDIR /usr/local/apache2/htdocs/
 
-COPY ${BUILD_DIR} ./
-
-EXPOSE 3000
-CMD [ "npm", "start" ]
+COPY {BUILD_DIR} ./
