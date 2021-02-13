@@ -14,9 +14,17 @@ Development of continuous integration scripts with using [concourse-ci](https://
 ## Pipelines 
 
 * Preview Pipeline
-* * branch: development
-* * jobs: [testflight-preview, build-preview, deploy-preview, version-minor, version-major]
+  * branch: development
+  * jobs: 
+    * Testflight auto trigger,
+    * Build auto trigger,
+    * Deploy auto trigger,
+    * Version-minor manual trigger, 
+    * Version-major manual trigger
 
 * Prod Pipeline
-* * branch: master
-* * jobs: [testflight-prod, build-prod, deploy-prod]
+  * branch: master
+  * jobs:
+    * Testflight auto trigger,
+    * Build auto trigger,
+    * Deploy auto trigger,
